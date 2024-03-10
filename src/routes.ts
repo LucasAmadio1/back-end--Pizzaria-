@@ -1,7 +1,12 @@
-import { Router, Request, Response } from 'express'
+import { Router } from 'express'
+
+import { CreateUserController } from './controllers/user/CreateUserController'
+import { AuthUserController } from './controllers/user/AuthUserController'
+
+const createUserController = new CreateUserController()
+const authUserController = new AuthUserController()
 
 export const router = Router()
   
-router.get('/test', (req: Request, res: Response) => {
-  throw new Error('Erro ao fazer a requisição')
-}) 
+router.post('/users', createUserController.handle)
+router.post('/session', authUserController.handle)
