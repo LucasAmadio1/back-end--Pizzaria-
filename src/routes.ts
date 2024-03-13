@@ -7,6 +7,7 @@ import { DetailUserController } from './controllers/user/DetailUserController'
 import { CreateCategoryController } from './controllers/category/CreateCategoryController'
 import { ListCategoryController } from './controllers/category/ListCategoryController'
 import { CreateProductController } from './controllers/product/CreateProductController'
+import { ListByCategoryController } from './controllers/product/ListByCategoryController'
 
 import { isAuthenticated } from './middlewares/isAuthenticated'
 
@@ -18,6 +19,7 @@ const detailUserController =  new DetailUserController()
 const createCategoryController = new CreateCategoryController()
 const listCategoryController = new ListCategoryController()
 const createProductController = new CreateProductController()
+const listByCategoryController = new ListByCategoryController()
 
 export const router = Router()
 
@@ -34,3 +36,4 @@ router.get('/category', isAuthenticated, listCategoryController.handle)
 
 // rotas produtos
 router.post('/product', isAuthenticated, uplaod.single('file'), createProductController.handle)
+router.get('/category/products', isAuthenticated, listByCategoryController.handle)
