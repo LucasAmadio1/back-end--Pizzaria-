@@ -8,6 +8,8 @@ import { CreateCategoryController } from './controllers/category/CreateCategoryC
 import { ListCategoryController } from './controllers/category/ListCategoryController'
 import { CreateProductController } from './controllers/product/CreateProductController'
 import { ListByCategoryController } from './controllers/product/ListByCategoryController'
+import { CreateOrderController } from './controllers/order/CreateOrderController'
+import { RemoveOrderController } from './controllers/order/RemoveOrderController'
 
 import { isAuthenticated } from './middlewares/isAuthenticated'
 
@@ -20,6 +22,8 @@ const createCategoryController = new CreateCategoryController()
 const listCategoryController = new ListCategoryController()
 const createProductController = new CreateProductController()
 const listByCategoryController = new ListByCategoryController()
+const createOrderController = new CreateOrderController()
+const removeOrderController = new RemoveOrderController()
 
 export const router = Router()
 
@@ -37,3 +41,7 @@ router.get('/category', isAuthenticated, listCategoryController.handle)
 // rotas produtos
 router.post('/product', isAuthenticated, uplaod.single('file'), createProductController.handle)
 router.get('/category/products', isAuthenticated, listByCategoryController.handle)
+
+// rotas pedidos
+router.post('/pedido', isAuthenticated, createOrderController.handle)
+router.delete('/pedido', isAuthenticated, removeOrderController.handle)
