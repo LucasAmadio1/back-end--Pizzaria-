@@ -10,6 +10,12 @@ import { CreateProductController } from './controllers/product/CreateProductCont
 import { ListByCategoryController } from './controllers/product/ListByCategoryController'
 import { CreateOrderController } from './controllers/order/CreateOrderController'
 import { RemoveOrderController } from './controllers/order/RemoveOrderController'
+import { AddItemController } from './controllers/order/AddItemController'
+import { RemoveItemController } from './controllers/order/RemoveItemController'
+import { SendOrderController } from './controllers/order/SendOrderController'
+import { ListOrdersController } from './controllers/order/ListOrdersController'
+import { DetailOrderController } from './controllers/order/DetailOrderController'
+import { FinishOrderController } from './controllers/order/FinishOrderController'
 
 import { isAuthenticated } from './middlewares/isAuthenticated'
 
@@ -24,6 +30,12 @@ const createProductController = new CreateProductController()
 const listByCategoryController = new ListByCategoryController()
 const createOrderController = new CreateOrderController()
 const removeOrderController = new RemoveOrderController()
+const addItemController = new AddItemController()
+const removeItemController = new RemoveItemController()
+const sendOrderController = new SendOrderController()
+const listOrdersController = new ListOrdersController()
+const detailOrderController = new DetailOrderController()
+const finishOrderController = new FinishOrderController()
 
 export const router = Router()
 
@@ -45,3 +57,10 @@ router.get('/category/products', isAuthenticated, listByCategoryController.handl
 // rotas pedidos
 router.post('/pedido', isAuthenticated, createOrderController.handle)
 router.delete('/pedido', isAuthenticated, removeOrderController.handle)
+router.post('/pedido/add', isAuthenticated, addItemController.handle)
+router.delete('/pedido/remove', isAuthenticated, removeItemController.handle)
+router.put('/pedido/send', isAuthenticated, sendOrderController.handle)
+router.get('/pedidos', isAuthenticated, listOrdersController.handle)
+router.get('/pedido/detail', isAuthenticated, detailOrderController.handle)
+router.put('/pedido/finish', isAuthenticated, finishOrderController.handle)
+
